@@ -3,7 +3,7 @@
 # ES: Flujo de automatización de reporte diario de ventas
 
 name: daily-sales-report
-description: Generate a daily report, convert to PDF, and send by email.
+description: Generate a daily report and convert it to PDF.
 enabled: true
 
 steps:
@@ -22,12 +22,3 @@ steps:
       input_path: "./reports/daily_sales_{{ date }}.docx"
       to: pdf
       output_path: "./reports/daily_sales_{{ date }}.pdf"
-
-  - action: send_email
-    params:
-      to:
-        - "manager@example.com"
-      subject: "[Auto] Daily Sales Report {{ date }}"
-      body: "Attached is today's report."
-      attachments:
-        - "./reports/daily_sales_{{ date }}.pdf"

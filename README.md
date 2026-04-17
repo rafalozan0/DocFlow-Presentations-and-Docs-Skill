@@ -174,10 +174,9 @@ Expected output shape (minimum):
 
 - Local-first by default.
 - No hidden outbound data flows.
-- SMTP is explicit-only action.
-- Secrets must come from env vars (`OFFICE_EMAIL_PASSWORD`, provider keys).
 - Do not hardcode credentials.
 - HTML render mode requires local `google-chrome` headless binary.
+- You can override Chrome binary path with `OFFICE_CHROME_BIN`.
 
 See:
 - `docs/SECURITY.md`

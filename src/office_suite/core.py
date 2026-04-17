@@ -1,7 +1,7 @@
 import os
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
-from . import docx, email, html_slides, pdf, pptx, template_registry, utils, xlsx
+from . import docx, html_slides, pdf, pptx, template_registry, utils, xlsx
 
 
 class OfficeSuite:
@@ -16,7 +16,6 @@ class OfficeSuite:
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
-        self.email_config: Dict[str, Any] = {}
 
     @staticmethod
     def _normalize_output_kw(kwargs: Dict[str, Any]) -> Dict[str, Any]:
@@ -157,37 +156,6 @@ class OfficeSuite:
 
         return results
 
-    def config_email(self, **kwargs) -> None:
-        """Configure email connection defaults."""
-        self.email_config = dict(kwargs)
-
-    def send_email(
-        self,
-        to: Union[str, List[str]],
-        subject: str,
-        body: str,
-        attachments: Optional[List[str]] = None,
-        **kwargs,
-    ) -> Dict[str, Any]:
-        """Send an email with optional attachments."""
-        if not self.email_config:
-            return {"success": False, "error": "Email is not configured. Call config_email() first."}
-
-        recipients = [to] if isinstance(to, str) else to
-
-        try:
-            result = email.send_email(
-                to=recipients,
-                subject=subject,
-                body=body,
-                attachments=attachments,
-                **self.email_config,
-                **kwargs,
-            )
-            return {"success": True, **result}
-        except Exception as e:
-            return {"success": False, "error": f"Email sending failed: {e}"}
-
     def execute_workflow(self, workflow_config: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a minimal, explicit workflow definition.
 
@@ -226,8 +194,6 @@ class OfficeSuite:
                 result = self.convert(**params)
             elif action in {"add_watermark", "watermark"}:
                 result = self.add_watermark(**params)
-            elif action == "send_email":
-                result = self.send_email(**params)
             elif action == "extract_data":
                 result = self.extract_data(**params)
             else:

@@ -30,7 +30,6 @@ EN:
 - Convert formats (LibreOffice-backed)
 - Extract document text/data
 - Batch conversions and watermark helpers
-- Send SMTP email explicitly (with attachments)
 - Generate presentations with preflight preferences
 - Build charts using:
   - Option A: native `python-pptx`
@@ -53,7 +52,6 @@ ES:
 - Convertir formatos (con LibreOffice)
 - Extraer texto/datos de documentos
 - Conversión por lotes y helpers de watermark
-- Enviar SMTP explícitamente (con adjuntos)
 - Generar presentaciones con preferencias preflight
 - Crear gráficos con:
   - Opción A: `python-pptx` nativo
@@ -74,15 +72,13 @@ ES:
 
 EN:
 - Local processing by default
-- No hidden network calls
-- Network only for explicit SMTP send actions
-- Never hardcode credentials; use `OFFICE_EMAIL_PASSWORD`
+- No hidden network calls for this skill runtime
+- Never hardcode credentials
 
 ES:
 - Procesamiento local por defecto
-- Sin llamadas de red ocultas
-- Red solo para envíos SMTP explícitos
-- Nunca hardcodear credenciales; usar `OFFICE_EMAIL_PASSWORD`
+- Sin llamadas de red ocultas en este runtime de la skill
+- Nunca hardcodear credenciales
 
 ## Quick start | Inicio rápido
 
