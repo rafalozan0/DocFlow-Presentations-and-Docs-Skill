@@ -51,28 +51,68 @@ Latest templates are shown first.
 
 ### Featured slide templates (latest first)
 
-![Slide - startup-pitch](docs/screenshots/templates/slides/startup-pitch.png)
-![Slide - design-review](docs/screenshots/templates/slides/design-review.png)
-![Slide - sales-pitch](docs/screenshots/templates/slides/sales-pitch.png)
-![Slide - cover-blue](docs/screenshots/templates/slides/cover-blue.png)
-![Slide - question-3d](docs/screenshots/templates/slides/question-3d.png)
-![Slide - revenue-streams](docs/screenshots/templates/slides/revenue-streams.png)
-![Slide - brutalist-concrete](docs/screenshots/templates/slides/brutalist-concrete.png)
-![Slide - swiss-minimal](docs/screenshots/templates/slides/swiss-minimal.png)
-![Slide - mono-editorial](docs/screenshots/templates/slides/mono-editorial.png)
-![Slide - editorial-layout](docs/screenshots/templates/slides/editorial-layout.png)
-![Slide - manifesto-grain](docs/screenshots/templates/slides/manifesto-grain.png)
-![Slide - chart-kpi-dashboard](docs/screenshots/templates/slides/chart-kpi-dashboard.png)
-![Slide - chart-comparison](docs/screenshots/templates/slides/chart-comparison.png)
+Use these IDs directly when calling templates:
+
+**Template ID:** `startup-pitch` — Startup Pitch · Hero Pill
+![Slide template - startup-pitch](docs/screenshots/templates/slides/startup-pitch.png)
+
+**Template ID:** `design-review` — Design Review · Framed Hero
+![Slide template - design-review](docs/screenshots/templates/slides/design-review.png)
+
+**Template ID:** `sales-pitch` — Sales Pitch · Braced Title
+![Slide template - sales-pitch](docs/screenshots/templates/slides/sales-pitch.png)
+
+**Template ID:** `cover-blue` — Cover · Solid Color
+![Slide template - cover-blue](docs/screenshots/templates/slides/cover-blue.png)
+
+**Template ID:** `question-3d` — Question Slide (3D Glow)
+![Slide template - question-3d](docs/screenshots/templates/slides/question-3d.png)
+
+**Template ID:** `revenue-streams` — Two-column Comparison
+![Slide template - revenue-streams](docs/screenshots/templates/slides/revenue-streams.png)
+
+**Template ID:** `brutalist-concrete` — Brutalist · Concrete Grain
+![Slide template - brutalist-concrete](docs/screenshots/templates/slides/brutalist-concrete.png)
+
+**Template ID:** `swiss-minimal` — Swiss Minimal
+![Slide template - swiss-minimal](docs/screenshots/templates/slides/swiss-minimal.png)
+
+**Template ID:** `mono-editorial` — Mono Editorial · Numbered List
+![Slide template - mono-editorial](docs/screenshots/templates/slides/mono-editorial.png)
+
+**Template ID:** `editorial-layout` — Editorial Layout
+![Slide template - editorial-layout](docs/screenshots/templates/slides/editorial-layout.png)
+
+**Template ID:** `manifesto-grain` — Manifesto (Purple Grain)
+![Slide template - manifesto-grain](docs/screenshots/templates/slides/manifesto-grain.png)
+
+**Template ID:** `chart-kpi-dashboard` — KPI Dashboard (4 KPIs + Bar Chart)
+![Slide template - chart-kpi-dashboard](docs/screenshots/templates/slides/chart-kpi-dashboard.png)
+
+**Template ID:** `chart-comparison` — Multi-series Line Comparison
+![Slide template - chart-comparison](docs/screenshots/templates/slides/chart-comparison.png)
 
 ### Featured document templates (latest first)
 
-![Document - proposal-cover](docs/screenshots/templates/documents/proposal-cover.png)
-![Document - report-executive](docs/screenshots/templates/documents/report-executive.png)
-![Document - invoice-brutalist](docs/screenshots/templates/documents/invoice-brutalist.png)
-![Document - invoice-modern](docs/screenshots/templates/documents/invoice-modern.png)
-![Document - report-minimal](docs/screenshots/templates/documents/report-minimal.png)
-![Document - letter-formal](docs/screenshots/templates/documents/letter-formal.png)
+Use these IDs directly when calling templates:
+
+**Template ID:** `proposal-cover` — Proposal Cover Page
+![Document template - proposal-cover](docs/screenshots/templates/documents/proposal-cover.png)
+
+**Template ID:** `report-executive` — Executive Report
+![Document template - report-executive](docs/screenshots/templates/documents/report-executive.png)
+
+**Template ID:** `invoice-brutalist` — Invoice · Brutalist
+![Document template - invoice-brutalist](docs/screenshots/templates/documents/invoice-brutalist.png)
+
+**Template ID:** `invoice-modern` — Invoice · Modern
+![Document template - invoice-modern](docs/screenshots/templates/documents/invoice-modern.png)
+
+**Template ID:** `report-minimal` — Report · Minimal
+![Document template - report-minimal](docs/screenshots/templates/documents/report-minimal.png)
+
+**Template ID:** `letter-formal` — Formal Letter
+![Document template - letter-formal](docs/screenshots/templates/documents/letter-formal.png)
 
 ### Theme previews (python-pptx)
 
