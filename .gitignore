@@ -1,0 +1,45 @@
+# Sensitive files
+.env
+*.log
+*.key
+secrets.*
+email_config.json
+*.pem
+*.pub
+# Build and Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+*.tmp
+*.temp
+*.swp
+*~
+# Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+# Generated office docs and local output
+*.docx
+*.xlsx
+*.pptx
+*.pdf
+test_output/
+output/
+temp/
+attachments/
+# Packaging
+dist/
+build/
+*.egg-info/
+*.egg
+eggs/
+wheels/
+pip-wheel-metadata/
+# Virtual environments
+venv/
+env/
+.venv/
+pyvenv.cfg

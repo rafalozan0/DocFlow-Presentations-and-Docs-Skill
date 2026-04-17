@@ -1,0 +1,33 @@
+# Workflow Example (Agent-Agnostic)
+# EN: Daily sales report automation
+# ES: Flujo de automatización de reporte diario de ventas
+
+name: daily-sales-report
+description: Generate a daily report, convert to PDF, and send by email.
+enabled: true
+
+steps:
+  - action: create
+    params:
+      doc_type: word
+      title: "Daily Sales Report"
+      content: |
+        # Daily Summary
+        Revenue: {{ revenue }}
+        Growth: {{ growth }}
+      output_path: "./reports/daily_sales_{{ date }}.docx"
+
+  - action: convert
+    params:
+      input_path: "./reports/daily_sales_{{ date }}.docx"
+      to: pdf
+      output_path: "./reports/daily_sales_{{ date }}.pdf"
+
+  - action: send_email
+    params:
+      to:
+        - "manager@example.com"
+      subject: "[Auto] Daily Sales Report {{ date }}"
+      body: "Attached is today's report."
+      attachments:
+        - "./reports/daily_sales_{{ date }}.pdf"

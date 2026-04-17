@@ -1,0 +1,27 @@
+DocFlow - Presentations and Docs Skill
+
+Attribution and licensing notice
+
+This repository is based on the original project by:
+- Tao Jin (GitHub: shynloc)
+
+Original upstream repository:
+- https://github.com/shynloc/Hermes-Easy-Office-Suite
+
+Modifications and adaptation in this fork/rework by:
+- Rafael Lozano
+
+Scope of modifications by Rafael Lozano includes (non-exhaustive):
+- Agent-agnostic restructuring for Hermes/OpenClaw compatibility
+- Bilingual documentation (English/Español)
+- Security hardening and local-first defaults
+- Naming/branding normalization to "DocFlow - Presentations and Docs Skill"
+- Presentation preflight UX and chart mode integration updates
+- Packaging, examples, and repository cleanup for Git publishing
+
+License:
+- MIT License is preserved.
+- See LICENSE for full terms.
+
+Requirement reminder under MIT:
+- Keep copyright and permission notices in copies or substantial portions.
