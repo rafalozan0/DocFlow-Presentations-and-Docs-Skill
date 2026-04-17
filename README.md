@@ -56,9 +56,7 @@ DocFlow helps agents generate real deliverables, fast:
 3) Use the Python API `OfficeSuite` for create/convert/extract workflows.
 4) For presentations, enforce preflight: `theme`, `chart_mode`, `use_emojis`, `tone`.
 
-## Screenshots (placeholders)
-
-> Add real captures in `docs/screenshots/` with these filenames.
+## Screenshots
 
 ### Theme previews
 
@@ -73,6 +71,10 @@ DocFlow helps agents generate real deliverables, fast:
 ![Example - Title Slide](docs/screenshots/example-title-slide.png)
 ![Example - Native Chart Slide](docs/screenshots/example-native-chart-slide.png)
 ![Example - Matplotlib Chart Slide](docs/screenshots/example-matplotlib-chart-slide.png)
+
+### Document example
+
+![Example - Document Page 1](docs/screenshots/example-document-page-1.png)
 
 ## English
 
