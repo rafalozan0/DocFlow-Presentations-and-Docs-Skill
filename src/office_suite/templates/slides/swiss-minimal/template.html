@@ -1,0 +1,23 @@
+{% extends "slide_base.html" %}
+{% block slide_classes %}align-{{ align|default('left') }}{% endblock %}
+{% block styles %}
+  body { background:#fafaf7; color:#111; }
+  .slide { padding: 120px 160px; display:grid;
+           grid-template-rows: auto auto 1fr auto; gap:40px; }
+  .slide.align-center { text-align:center; }
+  .section { font-size:22px; letter-spacing:.2em; text-transform:uppercase;
+             color:#9a9a9a; font-weight:500; }
+  h1 { margin:0; font-size:120px; line-height:1.05;
+       letter-spacing:-.02em; font-weight:500; max-width:22ch; }
+  .align-center h1 { max-width:28ch; margin-inline:auto; }
+  .body { font-size:32px; line-height:1.5; color:#3b3b3b; max-width:58ch; margin:0; }
+  .align-center .body { margin-inline:auto; }
+  footer { display:flex; justify-content:space-between; border-top:1px solid #222;
+           padding-top:28px; font-size:20px; color:#555; }
+{% endblock %}
+{% block body %}
+  <div class="section">{{ section }}</div>
+  <h1>{{ headline }}</h1>
+  {% if body %}<p class="body">{{ body }}</p>{% else %}<div></div>{% endif %}
+  <footer><span>{{ footer_left }}</span><span>{{ footer_right }}</span></footer>
+{% endblock %}

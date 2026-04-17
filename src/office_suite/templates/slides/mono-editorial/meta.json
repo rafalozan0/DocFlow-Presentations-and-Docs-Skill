@@ -1,0 +1,26 @@
+{
+  "id": "mono-editorial",
+  "name": "Mono Editorial · Numbered List",
+  "category": "slides",
+  "style": "minimal",
+  "description": "Modern monochrome slide with a title, short intro, and a numbered list of items. Each item has a small number, bold label and muted description. Great for agendas, frameworks, step lists.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "kicker", "type": "string", "required": false, "default": ""},
+    {"name": "title", "type": "string", "required": true},
+    {"name": "intro", "type": "string", "required": false, "default": ""},
+    {"name": "items", "type": "array<object>", "required": true, "item_shape": {"label": "string", "body": "string"}},
+    {"name": "footer", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "kicker": "Agenda",
+    "title": "How we'll spend the next 30 minutes",
+    "intro": "A quick walk-through of scope, approach and measurable outcomes.",
+    "items": [
+      {"label": "Context", "body": "Business problem and current constraints."},
+      {"label": "Approach", "body": "Research, design, and delivery framework."},
+      {"label": "Outcomes", "body": "KPIs we commit to and how we'll measure them."},
+      {"label": "Next steps", "body": "Decisions needed from the team this week."}
+    ]
+  }
+}

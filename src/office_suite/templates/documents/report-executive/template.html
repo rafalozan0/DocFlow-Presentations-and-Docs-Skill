@@ -1,0 +1,71 @@
+{% extends "doc_base.html" %}
+{% block styles %}
+  body { font-size: 11pt; color:#111827; }
+  /* Cover */
+  .cover { min-height:297mm; padding: 60mm 22mm 22mm; position:relative;
+           background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); }
+  .cover::before { content:""; position:absolute; top:0; left:0; right:0; height:12mm;
+                   background:{{ accent }}; }
+  .cover .eyebrow { font-size:10pt; letter-spacing:.2em; text-transform:uppercase;
+                    color:{{ accent }}; font-weight:700; }
+  .cover h1 { margin:12px 0 8px; font-size:36pt; letter-spacing:-.02em; line-height:1.05; }
+  .cover .subtitle { font-size:14pt; color:#475569; max-width:50ch; }
+  .cover .meta { position:absolute; bottom:22mm; left:22mm; right:22mm;
+                 display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;
+                 padding-top:10px; border-top:2px solid {{ accent }}; }
+  .cover .meta h4 { margin:0 0 4px; font-size:9pt; letter-spacing:.14em;
+                    text-transform:uppercase; color:#64748b; }
+  .cover .meta p { margin:0; font-size:11pt; font-weight:600; }
+
+  /* Content */
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit, minmax(60mm, 1fr));
+          gap:10mm; margin:0 0 10mm; }
+  .kpi { border-left:4px solid {{ accent }}; padding:6px 14px; }
+  .kpi .label { font-size:9pt; color:#64748b; letter-spacing:.08em;
+                text-transform:uppercase; }
+  .kpi .value { font-size:20pt; font-weight:800; letter-spacing:-.01em; }
+  .section { margin-bottom:8mm; }
+  .section h2 { margin:0 0 4mm; font-size:16pt; color:{{ accent }};
+                border-bottom:1px solid #e2e8f0; padding-bottom:4px; }
+  .section p { margin:0 0 3mm; line-height:1.6; color:#334155; }
+  .section ul { margin:0; padding-left:18px; line-height:1.65; color:#334155; }
+  .pagefoot { position:absolute; bottom:14mm; left:22mm; right:22mm;
+              border-top:1px solid #e2e8f0; padding-top:6px;
+              font-size:9pt; color:#64748b; display:flex; justify-content:space-between; }
+{% endblock %}
+{% block body %}
+  {# Cover #}
+  <div class="cover">
+    <div class="eyebrow">{{ cover.company }}</div>
+    <h1>{{ cover.title }}</h1>
+    {% if cover.subtitle %}<div class="subtitle">{{ cover.subtitle }}</div>{% endif %}
+    <div class="meta">
+      <div><h4>Author</h4><p>{{ cover.author or '—' }}</p></div>
+      <div><h4>Date</h4><p>{{ cover.date or '—' }}</p></div>
+      <div><h4>Document</h4><p>Executive Report</p></div>
+    </div>
+  </div>
+
+  {# Content pages #}
+  <div class="page">
+    {% if kpis %}
+    <div class="kpis">
+      {% for k in kpis %}
+      <div class="kpi"><div class="label">{{ k.label }}</div><div class="value">{{ k.value }}</div></div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for s in sections %}
+    <section class="section">
+      <h2>{{ s.heading }}</h2>
+      {% for p in s.paragraphs|default([]) %}<p>{{ p }}</p>{% endfor %}
+      {% if s.bullets %}
+        <ul>{% for b in s.bullets %}<li>{{ b }}</li>{% endfor %}</ul>
+      {% endif %}
+    </section>
+    {% endfor %}
+
+    <div class="pagefoot"><span>{{ footer }}</span><span>{{ cover.title }}</span></div>
+  </div>
+{% endblock %}

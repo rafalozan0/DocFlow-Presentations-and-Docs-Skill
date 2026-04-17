@@ -1,0 +1,92 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#fff; color:#0f172a; }
+  .slide { padding: 88px 112px 72px; display:grid;
+           grid-template-rows: auto 1fr auto; gap:36px; }
+  .kicker { font-size:20px; letter-spacing:.18em; text-transform:uppercase;
+            color:#6b7280; font-weight:600; }
+  h1 { margin:0; font-size:72px; font-weight:800; letter-spacing:-.02em; max-width:30ch; }
+  .cols { display:grid; grid-template-columns: .9fr 1.5fr; gap:72px; align-items:stretch; }
+  .takeaways { display:flex; flex-direction:column; gap:26px; font-size:26px;
+               line-height:1.5; color:#334155; }
+  .takeaways .bullet { display:grid; grid-template-columns: 16px 1fr; gap:18px; }
+  .takeaways .dot { width:16px; height:16px; border-radius:50%;
+                    background:#4f46e5; margin-top:14px; }
+  .chart { background:#f8fafc; border-radius:18px; padding:28px; }
+  .chart h3 { margin:0 0 12px; font-size:22px; color:#334155; }
+  .chart svg { width:100%; height:460px; }
+  .legend { display:flex; gap:28px; margin-top:14px; font-size:20px; color:#334155; }
+  .legend .sw { width:18px; height:18px; border-radius:4px; display:inline-block;
+                margin-right:10px; vertical-align:middle; }
+  footer { display:flex; justify-content:space-between; font-size:18px; color:#6b7280; }
+{% endblock %}
+{% block body %}
+  {% if kicker %}<div class="kicker">{{ kicker }}</div>{% endif %}
+  <h1>{{ title }}</h1>
+
+  <div class="cols">
+    <div class="takeaways">
+      {% for t in takeaways %}
+      <div class="bullet"><span class="dot"></span><span>{{ t }}</span></div>
+      {% endfor %}
+    </div>
+
+    <div class="chart">
+      <h3>{{ chart.title }}</h3>
+      {% set cats = chart.categories %}
+      {% set n = cats|length %}
+      {% set plotw = 1000 %}
+      {% set ploth = 420 %}
+      {% set pad_l = 60 %}
+      {% set pad_r = 30 %}
+      {% set pad_t = 20 %}
+      {% set pad_b = 50 %}
+      {% set all_vals = [] %}
+      {% for s in chart.series %}{% for v in s['values'] %}{% set _ = all_vals.append(v) %}{% endfor %}{% endfor %}
+      {% set vmax = all_vals|max %}
+      {% set vmin = all_vals|min %}
+      {% set vrange = (vmax - vmin) if (vmax - vmin) > 0 else 1 %}
+      {% set inner_w = plotw - pad_l - pad_r %}
+      {% set inner_h = ploth - pad_t - pad_b %}
+      <svg viewBox="0 0 {{ plotw }} {{ ploth }}" preserveAspectRatio="xMidYMid meet">
+        {# gridlines #}
+        {% for i in range(5) %}
+          {% set gy = pad_t + (inner_h * i / 4) %}
+          <line x1="{{ pad_l }}" y1="{{ gy }}" x2="{{ plotw - pad_r }}" y2="{{ gy }}"
+                stroke="#e2e8f0" stroke-width="1"/>
+        {% endfor %}
+        {# x labels #}
+        {% for c in cats %}
+          {% set cx = pad_l + (inner_w * loop.index0 / ((n - 1) if n > 1 else 1)) %}
+          <text x="{{ cx }}" y="{{ ploth - 20 }}" text-anchor="middle"
+                font-size="16" fill="#64748b">{{ c }}</text>
+        {% endfor %}
+        {# series #}
+        {% for s in chart.series %}
+          {% set color = s.color|default('#4f46e5') %}
+          {% set pts = [] %}
+          {% for v in s['values'] %}
+            {% set cx = pad_l + (inner_w * loop.index0 / ((n - 1) if n > 1 else 1)) %}
+            {% set cy = pad_t + inner_h - ((v - vmin) / vrange * inner_h) %}
+            {% set _ = pts.append(cx ~ ',' ~ cy) %}
+          {% endfor %}
+          <polyline points="{{ pts|join(' ') }}" fill="none"
+                    stroke="{{ color }}" stroke-width="4"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+          {% for v in s['values'] %}
+            {% set cx = pad_l + (inner_w * loop.index0 / ((n - 1) if n > 1 else 1)) %}
+            {% set cy = pad_t + inner_h - ((v - vmin) / vrange * inner_h) %}
+            <circle cx="{{ cx }}" cy="{{ cy }}" r="6" fill="{{ color }}"/>
+          {% endfor %}
+        {% endfor %}
+      </svg>
+      <div class="legend">
+        {% for s in chart.series %}
+          <span><span class="sw" style="background:{{ s.color|default('#4f46e5') }}"></span>{{ s.name }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <footer><span>{{ footer }}</span><span></span></footer>
+{% endblock %}

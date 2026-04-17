@@ -1,0 +1,37 @@
+{
+  "id": "chart-comparison",
+  "name": "Multi-series Line Comparison",
+  "category": "slides",
+  "style": "data-dashboard",
+  "description": "Slide focused on a single hero chart: a multi-series line chart on the right and context notes on the left. SVG-native, no JS.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "kicker", "type": "string", "required": false, "default": ""},
+    {"name": "title", "type": "string", "required": true},
+    {"name": "takeaways", "type": "array<string>", "required": false, "default": [], "description": "Bullet insights on the left column."},
+    {"name": "chart", "type": "object", "required": true, "item_shape": {
+      "title": "string",
+      "categories": "array<string>",
+      "series": "array<{name, values, color}>",
+      "y_label": "string (optional)"
+    }},
+    {"name": "footer", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "kicker": "Benchmark",
+    "title": "Conversion rate vs. industry (2024-2026)",
+    "takeaways": [
+      "Our growth rate doubled the benchmark in 2025.",
+      "Q4 spike correlates with onboarding redesign.",
+      "2026 forecast stays above industry median."
+    ],
+    "chart": {
+      "title": "Conversion rate (%)",
+      "categories": ["Q1 24","Q2 24","Q3 24","Q4 24","Q1 25","Q2 25","Q3 25","Q4 25"],
+      "series": [
+        {"name": "Us", "values": [2.1, 2.4, 2.7, 3.1, 3.6, 4.2, 4.9, 5.8], "color": "#4f46e5"},
+        {"name": "Industry", "values": [2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7], "color": "#94a3b8"}
+      ]
+    }
+  }
+}

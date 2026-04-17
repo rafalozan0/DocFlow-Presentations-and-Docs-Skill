@@ -1,0 +1,28 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:{{ background }}; color:{{ ink }}; }
+  .slide { background:{{ background }}; color:{{ ink }};
+           padding: 96px 128px; display:grid;
+           grid-template-rows: auto 1fr auto; }
+  .top, .bottom { display:flex; justify-content:space-between; align-items:center; }
+  .pill { display:inline-block; padding:20px 40px; border-radius:999px;
+          background: color-mix(in srgb, white 70%, {{ background }} 30%);
+          border:1px solid rgba(0,0,0,.08);
+          font-size:22px; font-weight:700; letter-spacing:.12em; }
+  .center { display:grid; place-items:center; text-align:center; }
+  h1 { margin:0; font-size:260px; font-weight:800;
+       letter-spacing:-.04em; line-height:.95; }
+  .tagline { margin-top:56px; }
+{% endblock %}
+{% block body %}
+  <div class="top">
+    <span class="pill">{{ date_pill }}</span><span></span>
+  </div>
+  <div class="center">
+    <h1>{{ title }}</h1>
+    <div class="tagline"><span class="pill">{{ tagline_pill }}</span></div>
+  </div>
+  <div class="bottom">
+    <span></span><span class="pill">{{ corner_pill }}</span>
+  </div>
+{% endblock %}

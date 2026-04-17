@@ -1,0 +1,73 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#f6f7fb; color:#111827; }
+  .slide { padding: 72px 96px 56px; display:grid;
+           grid-template-rows: auto auto auto 1fr auto; gap:24px; }
+  .kicker { font-size:20px; letter-spacing:.18em; text-transform:uppercase;
+            color:#6b7280; font-weight:600; }
+  h1 { margin:0; font-size:80px; font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+  .sub { margin:0; font-size:26px; color:#4b5563; max-width:60ch; }
+  .grid { display:grid; grid-template-columns: repeat(4, 1fr) 1.8fr; gap:28px; align-items:stretch; }
+  .kpi { background:#fff; border-radius:18px; padding:32px;
+         box-shadow:0 6px 20px rgba(15,23,42,.06); display:flex;
+         flex-direction:column; justify-content:space-between; }
+  .kpi .label { font-size:20px; color:#6b7280; letter-spacing:.04em; text-transform:uppercase; }
+  .kpi .value { font-size:64px; font-weight:800; letter-spacing:-.02em;
+                margin-top:18px; color:#111827; }
+  .kpi .delta { margin-top:14px; font-size:22px; font-weight:700; }
+  .kpi .delta.pos { color:#16a34a; }
+  .kpi .delta.neg { color:#dc2626; }
+  .chart { background:#fff; border-radius:18px; padding:32px;
+           box-shadow:0 6px 20px rgba(15,23,42,.06);
+           grid-column:1 / -1; display:flex; flex-direction:column; }
+  .chart h3 { margin:0 0 18px; font-size:26px; font-weight:700; }
+  .chart svg { width:100%; height:300px; }
+  footer { display:flex; justify-content:space-between; font-size:18px; color:#6b7280; }
+{% endblock %}
+{% block body %}
+  {% if kicker %}<div class="kicker">{{ kicker }}</div>{% endif %}
+  <h1>{{ title }}</h1>
+  {% if subtitle %}<p class="sub">{{ subtitle }}</p>{% endif %}
+
+  <div class="grid">
+    {% for k in kpis[:4] %}
+    <div class="kpi">
+      <div class="label">{{ k.label }}</div>
+      <div class="value">{{ k.value }}</div>
+      {% if k.delta %}
+        <div class="delta {{ 'pos' if k.delta_positive else 'neg' }}">
+          {{ '▲' if k.delta_positive else '▼' }} {{ k.delta }}
+        </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="chart">
+      <h3>{{ chart.title }}</h3>
+      {% set vmax = (chart['values']|max) %}
+      {% set n = chart['values']|length %}
+      {% set bw = 90 %}
+      {% set gap = 28 %}
+      {% set plotw = (bw + gap) * n + gap %}
+      {% set ploth = 300 %}
+      <svg viewBox="0 0 {{ plotw }} {{ ploth + 60 }}" preserveAspectRatio="xMidYMid meet">
+        {# baseline #}
+        <line x1="0" y1="{{ ploth }}" x2="{{ plotw }}" y2="{{ ploth }}"
+              stroke="#e5e7eb" stroke-width="2"/>
+        {% for v in chart['values'] %}
+          {% set h = (v / vmax) * (ploth - 20) %}
+          {% set x = gap + loop.index0 * (bw + gap) %}
+          {% set y = ploth - h %}
+          <rect x="{{ x }}" y="{{ y }}" width="{{ bw }}" height="{{ h }}"
+                rx="6" fill="{{ accent|default('#4f46e5') }}"/>
+          <text x="{{ x + bw/2 }}" y="{{ y - 10 }}" text-anchor="middle"
+                font-size="18" fill="#111827" font-weight="700">{{ v }}{{ chart.unit|default('') }}</text>
+          <text x="{{ x + bw/2 }}" y="{{ ploth + 30 }}" text-anchor="middle"
+                font-size="18" fill="#6b7280">{{ chart.categories[loop.index0] }}</text>
+        {% endfor %}
+      </svg>
+    </div>
+  </div>
+
+  <footer><span>{{ footer }}</span><span></span></footer>
+{% endblock %}

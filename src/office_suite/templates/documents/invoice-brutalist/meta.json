@@ -1,0 +1,32 @@
+{
+  "id": "invoice-brutalist",
+  "name": "Invoice · Brutalist",
+  "category": "documents",
+  "style": "brutalist",
+  "description": "High-contrast brutalist invoice: heavy rules, mono type, ALL CAPS labels, black border. Same slots as invoice-modern.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "invoice_number", "type": "string", "required": true},
+    {"name": "issue_date", "type": "string", "required": true},
+    {"name": "due_date", "type": "string", "required": false, "default": ""},
+    {"name": "currency", "type": "string", "required": false, "default": "USD"},
+    {"name": "issuer", "type": "object", "required": true},
+    {"name": "client", "type": "object", "required": true},
+    {"name": "items", "type": "array<object>", "required": true},
+    {"name": "tax_rate", "type": "number", "required": false, "default": 0.0},
+    {"name": "notes", "type": "string", "required": false, "default": ""},
+    {"name": "payment_details", "type": "array<string>", "required": false, "default": []}
+  ],
+  "example": {
+    "invoice_number": "INV-2026-0042",
+    "issue_date": "2026-04-17",
+    "currency": "USD",
+    "issuer": {"name": "STUDIO NORTH", "address_lines": ["221B BAKER ST.", "LONDON, UK"]},
+    "client": {"name": "ACME CORP.", "address_lines": ["1 INFINITE LOOP", "CUPERTINO, CA"]},
+    "items": [
+      {"description": "DESIGN SPRINT (5 DAYS)", "qty": 1, "unit_price": 8500},
+      {"description": "BRAND GUIDELINES", "qty": 1, "unit_price": 3200}
+    ],
+    "tax_rate": 0.21
+  }
+}

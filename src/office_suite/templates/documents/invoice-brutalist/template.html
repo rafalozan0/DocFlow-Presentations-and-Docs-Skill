@@ -1,0 +1,102 @@
+{% extends "doc_base.html" %}
+{% block styles %}
+  body { font-family: "JetBrains Mono", "Courier New", monospace; color:#000; }
+  .page { border: 4px solid #000; }
+  .stamp { position:absolute; top:20mm; right:20mm;
+           border:4px solid #000; padding:4px 12px;
+           font-size:10pt; font-weight:900; letter-spacing:.2em; transform:rotate(-4deg); }
+  h1 { margin:0; font-size:56pt; letter-spacing:-.04em; line-height:1;
+       font-weight:900; text-transform:uppercase; font-family: "Archivo Black", "Arial Black", sans-serif; }
+  .rule { border-top:4px solid #000; margin:18px 0; }
+  .meta-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;
+               font-size:10pt; }
+  .meta-grid .label { font-weight:900; letter-spacing:.1em; }
+  .parties { display:grid; grid-template-columns:1fr 1fr; border-top:4px solid #000; border-bottom:4px solid #000; }
+  .party { padding:16px 18px; }
+  .party + .party { border-left:4px solid #000; }
+  .party h3 { margin:0 0 6px; font-size:9pt; letter-spacing:.18em; font-weight:900; }
+  .party .name { font-size:14pt; font-weight:900; margin-bottom:4px; text-transform:uppercase; }
+  .party p { margin:0; font-size:10pt; line-height:1.45; }
+  table.items { width:100%; border-collapse:collapse; margin-top:24px; font-size:10pt; }
+  table.items th, table.items td { border-bottom:2px solid #000; padding:10px 8px; text-align:left; }
+  table.items thead th { border-bottom:4px solid #000; font-size:9pt;
+                         letter-spacing:.1em; text-transform:uppercase; }
+  table.items td.num, table.items th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .totals { margin-top:16px; margin-left:auto; width:55%;
+            border:4px solid #000; padding:14px 18px; }
+  .totals .row { display:flex; justify-content:space-between; padding:6px 0;
+                 font-variant-numeric:tabular-nums; font-size:11pt; }
+  .totals .row.grand { border-top:4px solid #000; margin-top:8px; padding-top:12px;
+                       font-size:16pt; font-weight:900; }
+  .footer { margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:16px;
+            border-top:4px solid #000; padding-top:14px; font-size:10pt; line-height:1.5; }
+  .footer h4 { margin:0 0 6px; font-size:10pt; letter-spacing:.14em; font-weight:900; }
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <div class="stamp">UNPAID</div>
+    <h1>INVOICE</h1>
+    <div class="rule"></div>
+    <div class="meta-grid">
+      <div><div class="label">NO.</div>{{ invoice_number }}</div>
+      <div><div class="label">ISSUED</div>{{ issue_date }}</div>
+      <div><div class="label">DUE</div>{{ due_date or '—' }}</div>
+    </div>
+    <div class="rule"></div>
+
+    <div class="parties">
+      <div class="party">
+        <h3>FROM</h3>
+        <div class="name">{{ issuer.name }}</div>
+        {% for line in issuer.address_lines|default([]) %}<p>{{ line }}</p>{% endfor %}
+        {% if issuer.tax_id %}<p>TAX ID: {{ issuer.tax_id }}</p>{% endif %}
+      </div>
+      <div class="party">
+        <h3>BILL TO</h3>
+        <div class="name">{{ client.name }}</div>
+        {% for line in client.address_lines|default([]) %}<p>{{ line }}</p>{% endfor %}
+        {% if client.tax_id %}<p>TAX ID: {{ client.tax_id }}</p>{% endif %}
+      </div>
+    </div>
+
+    <table class="items">
+      <thead><tr>
+        <th>DESCRIPTION</th><th class="num">QTY</th>
+        <th class="num">UNIT</th><th class="num">AMOUNT</th>
+      </tr></thead>
+      <tbody>
+        {% set subtotal = namespace(v=0) %}
+        {% for it in items %}
+          {% set amt = (it.qty|float) * (it.unit_price|float) %}
+          {% set subtotal.v = subtotal.v + amt %}
+          <tr>
+            <td>{{ it.description }}</td>
+            <td class="num">{{ it.qty }}</td>
+            <td class="num">{{ '%.2f'|format(it.unit_price|float) }}</td>
+            <td class="num">{{ '%.2f'|format(amt) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% set tax = subtotal.v * (tax_rate|float) %}
+    {% set total = subtotal.v + tax %}
+    <div class="totals">
+      <div class="row"><span>SUBTOTAL</span><span>{{ '%.2f'|format(subtotal.v) }} {{ currency }}</span></div>
+      {% if tax_rate and tax_rate|float > 0 %}
+      <div class="row"><span>TAX {{ (tax_rate|float*100)|round(0)|int }}%</span><span>{{ '%.2f'|format(tax) }} {{ currency }}</span></div>
+      {% endif %}
+      <div class="row grand"><span>TOTAL</span><span>{{ '%.2f'|format(total) }} {{ currency }}</span></div>
+    </div>
+
+    <div class="footer">
+      {% if payment_details %}
+      <div>
+        <h4>PAYMENT</h4>
+        {% for line in payment_details %}{{ line }}<br/>{% endfor %}
+      </div>
+      {% endif %}
+      {% if notes %}<div><h4>NOTES</h4>{{ notes }}</div>{% endif %}
+    </div>
+  </div>
+{% endblock %}

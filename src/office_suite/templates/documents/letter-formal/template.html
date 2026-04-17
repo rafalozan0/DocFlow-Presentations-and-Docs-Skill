@@ -1,0 +1,51 @@
+{% extends "doc_base.html" %}
+{% block styles %}
+  body { font-family:"Charter","Iowan Old Style","Georgia",serif;
+         font-size:11pt; color:#111; }
+  .sender { text-align:right; font-size:10pt; color:#333; line-height:1.5; }
+  .sender .name { font-weight:700; font-size:12pt; color:#111; }
+  .date { margin-top:8mm; font-size:10pt; color:#333; }
+  .recipient { margin-top:10mm; line-height:1.5; }
+  .recipient .name { font-weight:700; }
+  .subject { margin-top:8mm; font-weight:700; }
+  .salutation { margin-top:6mm; }
+  p { margin:3mm 0; line-height:1.75; text-align:justify; }
+  .closing { margin-top:10mm; }
+  .sig { margin-top:18mm; }
+  .sig .name { font-weight:700; border-top:1px solid #111;
+               padding-top:2mm; display:inline-block; min-width:60mm; }
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <div class="sender">
+      <div class="name">{{ sender.name }}</div>
+      {% if sender.role %}<div>{{ sender.role }}</div>{% endif %}
+      {% for line in sender.address_lines|default([]) %}<div>{{ line }}</div>{% endfor %}
+      {% if sender.email %}<div>{{ sender.email }}</div>{% endif %}
+      {% if sender.phone %}<div>{{ sender.phone }}</div>{% endif %}
+    </div>
+
+    <div class="date">{{ date }}</div>
+
+    <div class="recipient">
+      <div class="name">{{ recipient.name }}</div>
+      {% if recipient.role %}<div>{{ recipient.role }}</div>{% endif %}
+      {% for line in recipient.address_lines|default([]) %}<div>{{ line }}</div>{% endfor %}
+    </div>
+
+    {% if subject %}<div class="subject">Re: {{ subject }}</div>{% endif %}
+
+    <div class="salutation">{{ salutation }}</div>
+
+    {% for para in paragraphs %}
+      <p>{{ para }}</p>
+    {% endfor %}
+
+    <div class="closing">{{ closing }}</div>
+
+    <div class="sig">
+      <div class="name">{{ signature_name }}</div>
+      {% if signature_role %}<div>{{ signature_role }}</div>{% endif %}
+    </div>
+  </div>
+{% endblock %}

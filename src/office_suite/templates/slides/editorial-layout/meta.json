@@ -1,0 +1,25 @@
+{
+  "id": "editorial-layout",
+  "name": "Editorial Layout",
+  "category": "slides",
+  "style": "editorial",
+  "description": "Portfolio/editorial slide with a lead paragraph, two image placeholders, and two captioned subsections. Good for content slides in minimal, editorial decks.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "lead", "type": "string", "required": true, "description": "Main paragraph (left column)."},
+    {"name": "image_left", "type": "string", "required": false, "description": "URL or file path for left image placeholder."},
+    {"name": "image_right", "type": "string", "required": false, "description": "URL or file path for right image placeholder."},
+    {"name": "subsections", "type": "array<object>", "required": false, "default": [], "description": "Up to 2 subsections. Each: {title, body}.", "item_shape": {"title": "string", "body": "string"}},
+    {"name": "brand", "type": "string", "required": false, "default": "", "description": "Footer brand (e.g. website)."},
+    {"name": "page", "type": "string|number", "required": false, "default": ""}
+  ],
+  "example": {
+    "lead": "Short editorial paragraph introducing the topic.",
+    "subsections": [
+      {"title": "Subtitle A", "body": "Body copy for the first caption."},
+      {"title": "Subtitle B", "body": "Body copy for the second caption."}
+    ],
+    "brand": "stephenkelman.co.uk",
+    "page": 2
+  }
+}

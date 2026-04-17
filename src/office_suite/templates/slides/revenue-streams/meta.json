@@ -1,0 +1,36 @@
+{
+  "id": "revenue-streams",
+  "name": "Two-column Comparison",
+  "category": "slides",
+  "style": "light-editorial",
+  "description": "Two-column comparison layout with icon, heading, intro paragraph and labeled sub-blocks. Perfect for pricing, revenue streams, before/after, option A vs option B.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "title", "type": "string", "required": true},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#4b5cff"},
+    {"name": "columns", "type": "array<object>", "required": true, "description": "Exactly 2 columns expected.", "item_shape": {
+      "icon_emoji": "string (1 emoji, optional)",
+      "icon_color": "string (hex, optional)",
+      "heading": "string",
+      "intro": "string",
+      "blocks": "array<{label, text}>"
+    }}
+  ],
+  "example": {
+    "title": "Revenue Streams",
+    "columns": [
+      {"icon_emoji": "%", "icon_color": "#1fb372", "heading": "Commission",
+       "intro": "We charge a commission on each completed ride.",
+       "blocks": [
+         {"label": "Rate", "text": "Our commission rate is X%."},
+         {"label": "Advantage", "text": "Incentivizes quality service."}
+       ]},
+      {"icon_emoji": "◎", "icon_color": "#ff4a3d", "heading": "Subscription",
+       "intro": "Subscription-based VIP service with priority bookings.",
+       "blocks": [
+         {"label": "Pricing", "text": "Priced at $Y/month."},
+         {"label": "Advantage", "text": "Predictable recurring revenue."}
+       ]}
+    ]
+  }
+}

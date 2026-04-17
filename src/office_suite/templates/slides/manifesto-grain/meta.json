@@ -1,0 +1,28 @@
+{
+  "id": "manifesto-grain",
+  "name": "Manifesto (Purple Grain)",
+  "category": "slides",
+  "style": "bold-gradient",
+  "description": "Bold manifesto slide with a grainy purple gradient, oversized numeric hero, and a list of principles with arrow bullets. Ideal for values, principles, mission statements.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "eyebrow", "type": "string", "required": false, "default": "Manifesto"},
+    {"name": "brand", "type": "string", "required": false, "default": ""},
+    {"name": "number", "type": "string|number", "required": true, "description": "Section number, e.g. '01'."},
+    {"name": "total", "type": "string|number", "required": false, "default": "", "description": "Total sections, e.g. '05'."},
+    {"name": "points", "type": "array<object>", "required": true, "description": "List of principles. First item is highlighted, rest are dimmed.", "item_shape": {"text": "string", "active": "boolean (optional)"}},
+    {"name": "palette", "type": "enum(purple|teal|crimson|sunset)", "required": false, "default": "purple"}
+  ],
+  "example": {
+    "eyebrow": "Manifesto",
+    "brand": "Flawless Studio",
+    "number": "01",
+    "total": "05",
+    "points": [
+      {"text": "We listen closely, think deeply, and speak openly.", "active": true},
+      {"text": "The more complex a challenge, the simpler a solution it demands."},
+      {"text": "Always put your biggest ideas on the table."},
+      {"text": "People connect with stories, not products."}
+    ]
+  }
+}

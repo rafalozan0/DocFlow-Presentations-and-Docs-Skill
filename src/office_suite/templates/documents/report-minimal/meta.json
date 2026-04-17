@@ -1,0 +1,27 @@
+{
+  "id": "report-minimal",
+  "name": "Report · Minimal",
+  "category": "documents",
+  "style": "minimal",
+  "description": "Very simple one-column report. No cover, no accents, just a clean title, meta line, and sections. Good for internal memos and weekly updates.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "title", "type": "string", "required": true},
+    {"name": "meta_line", "type": "string", "required": false, "default": ""},
+    {"name": "summary", "type": "string", "required": false, "default": ""},
+    {"name": "sections", "type": "array<object>", "required": true, "item_shape": {
+      "heading": "string", "body": "string", "bullets": "array<string>"
+    }},
+    {"name": "footer", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "title": "Weekly update — Week 16",
+    "meta_line": "Rafael Lozano · Engineering · April 17, 2026",
+    "summary": "Shipped the new onboarding flow; payments incident resolved; next week we'll focus on billing analytics.",
+    "sections": [
+      {"heading": "Done", "bullets": ["Onboarding v2 rollout", "Payments incident postmortem"]},
+      {"heading": "In progress", "bullets": ["Billing analytics dashboard"]},
+      {"heading": "Risks", "body": "Vendor SLA renegotiation still pending."}
+    ]
+  }
+}

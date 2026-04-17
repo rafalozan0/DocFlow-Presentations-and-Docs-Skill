@@ -1,0 +1,33 @@
+{# Shared document base rendered as A4 PDF via headless Chrome. #}
+<!doctype html>
+<html lang="{{ lang|default('en') }}">
+<head>
+<meta charset="utf-8" />
+<title>{{ _meta.name|default('Document') }}</title>
+<style>
+  @page { size: A4; margin: 0; }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    width: 210mm;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 24mm 20mm;
+    position: relative;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+  {% block styles %}{% endblock %}
+</style>
+</head>
+<body>
+  {% block body %}{% endblock %}
+</body>
+</html>

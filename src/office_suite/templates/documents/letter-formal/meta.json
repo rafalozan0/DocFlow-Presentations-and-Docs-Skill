@@ -1,0 +1,38 @@
+{
+  "id": "letter-formal",
+  "name": "Formal Letter",
+  "category": "documents",
+  "style": "formal",
+  "description": "Traditional business letter: sender header, date, recipient block, salutation, body paragraphs, closing, and signature block.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "sender", "type": "object", "required": true, "item_shape": {
+      "name": "string", "role": "string (optional)", "address_lines": "array<string>",
+      "email": "string (optional)", "phone": "string (optional)"
+    }},
+    {"name": "recipient", "type": "object", "required": true, "item_shape": {
+      "name": "string", "role": "string (optional)", "address_lines": "array<string>"
+    }},
+    {"name": "date", "type": "string", "required": true},
+    {"name": "subject", "type": "string", "required": false, "default": ""},
+    {"name": "salutation", "type": "string", "required": false, "default": "Dear Sir or Madam,"},
+    {"name": "paragraphs", "type": "array<string>", "required": true},
+    {"name": "closing", "type": "string", "required": false, "default": "Sincerely,"},
+    {"name": "signature_name", "type": "string", "required": true},
+    {"name": "signature_role", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "sender": {"name": "Rafael Lozano", "role": "CEO", "address_lines": ["221B Baker St.", "London, UK"], "email": "rafa@studionorth.co"},
+    "recipient": {"name": "Jane Doe", "role": "Head of Procurement", "address_lines": ["Acme Corp.", "1 Infinite Loop", "Cupertino, CA"]},
+    "date": "April 17, 2026",
+    "subject": "Proposal PRO-2026-007 — extension of delivery window",
+    "salutation": "Dear Ms. Doe,",
+    "paragraphs": [
+      "Thank you for the opportunity to collaborate on the 2026 infrastructure overhaul.",
+      "After reviewing the scope with our delivery team, we would like to request a 2-week extension on the initial delivery milestone.",
+      "We remain fully committed to the quality and timelines of the overall programme and appreciate your understanding."
+    ],
+    "signature_name": "Rafael Lozano",
+    "signature_role": "CEO, Studio North"
+  }
+}

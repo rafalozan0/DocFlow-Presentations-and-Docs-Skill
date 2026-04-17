@@ -1,7 +1,7 @@
 import os
 from typing import Any, Dict, List, Optional, Union
 
-from . import docx, email, pdf, pptx, utils, xlsx
+from . import docx, email, html_slides, pdf, pptx, template_registry, utils, xlsx
 
 
 class OfficeSuite:
@@ -43,6 +43,11 @@ class OfficeSuite:
             "pdf": pdf.create_pdf,
             "pptx": pptx.create_pptx,
             "powerpoint": pptx.create_pptx,
+            "pptx_html": html_slides.build_pptx_from_html_theme,
+            "html_pptx": html_slides.build_pptx_from_html_theme,
+            "slide_template": self._create_single_slide_from_template,
+            "slide_deck_templates": self._create_pptx_from_templates,
+            "doc_template": self._create_document_from_template,
         }
 
         if doc_type not in handlers:
@@ -260,9 +265,91 @@ class OfficeSuite:
     @staticmethod
     def get_presentation_preflight_prompts() -> Dict[str, Any]:
         """Return available preflight options for deck generation."""
+        catalog = template_registry.list_templates()
         return {
             "themes": pptx.list_themes(),
             "chart_modes": pptx.list_chart_modes(),
             "tones": pptx.list_tones(),
+            "html_themes": html_slides.list_reference_themes(),
+            "slide_templates": [t["id"] for t in catalog["slides"]],
+            "document_templates": [t["id"] for t in catalog["documents"]],
             "preferences_required_for_strict_mode": ["theme", "chart_mode", "use_emojis", "tone"],
         }
+
+    @staticmethod
+    def list_templates(category: Optional[str] = None) -> Dict[str, Any]:
+        """List file-based slide/document templates with their slot contracts.
+
+        Args:
+            category: optional "slides" or "documents". If omitted, both are returned.
+        """
+        return template_registry.list_templates(category=category)
+
+    @staticmethod
+    def get_template_meta(template_id: str, category: str = "slides") -> Dict[str, Any]:
+        """Return the slot contract (meta.json) for a single template."""
+        return template_registry.get_template_meta(template_id, category=category)
+
+    @staticmethod
+    def _create_single_slide_from_template(**kwargs) -> Dict[str, Any]:
+        """Adapter: `doc_type="slide_template"`.
+
+        Expected kwargs:
+            template: template id (required)
+            data: dict of slot values
+            output_path: target path (.png, .pdf or .html)
+            output_format: "png" | "pdf" | "html" (default inferred from extension)
+        """
+        template_id = kwargs.get("template") or kwargs.get("template_id")
+        if not template_id:
+            raise ValueError("slide_template requires 'template' kwarg")
+        output_path = kwargs["output_path"]
+        fmt = kwargs.get("output_format") or os.path.splitext(output_path)[1].lstrip(".").lower() or "png"
+        data = kwargs.get("data", {}) or {}
+        return template_registry.render_slide_template(
+            template_id=template_id, data=data,
+            output_path=output_path, output_format=fmt,
+            width=int(kwargs.get("width", template_registry.SLIDE_WIDTH_PX)),
+            height=int(kwargs.get("height", template_registry.SLIDE_HEIGHT_PX)),
+        )
+
+    @staticmethod
+    def _create_pptx_from_templates(**kwargs) -> Dict[str, Any]:
+        """Adapter: `doc_type="slide_deck_templates"`.
+
+        Expected kwargs:
+            slides: list of {"template": id, "data": {...}}
+            output_path: target .pptx
+            keep_renders: bool (optional)
+            renders_dir: str (optional)
+        """
+        slides = kwargs.get("slides")
+        if not slides:
+            raise ValueError("slide_deck_templates requires non-empty 'slides' list")
+        return template_registry.build_pptx_from_templates(
+            slides=slides,
+            output_path=kwargs["output_path"],
+            keep_renders=bool(kwargs.get("keep_renders", False)),
+            renders_dir=kwargs.get("renders_dir"),
+        )
+
+    @staticmethod
+    def _create_document_from_template(**kwargs) -> Dict[str, Any]:
+        """Adapter: `doc_type="doc_template"`.
+
+        Expected kwargs:
+            template: template id (required)
+            data: dict of slot values
+            output_path: target path (.pdf, .html or .png)
+            output_format: optional override
+        """
+        template_id = kwargs.get("template") or kwargs.get("template_id")
+        if not template_id:
+            raise ValueError("doc_template requires 'template' kwarg")
+        output_path = kwargs["output_path"]
+        fmt = kwargs.get("output_format") or os.path.splitext(output_path)[1].lstrip(".").lower() or "pdf"
+        data = kwargs.get("data", {}) or {}
+        return template_registry.render_document_template(
+            template_id=template_id, data=data,
+            output_path=output_path, output_format=fmt,
+        )

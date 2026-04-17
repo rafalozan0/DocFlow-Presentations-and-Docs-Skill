@@ -1,0 +1,39 @@
+{
+  "id": "chart-kpi-dashboard",
+  "name": "KPI Dashboard (4 KPIs + Bar Chart)",
+  "category": "slides",
+  "style": "data-dashboard",
+  "description": "Dashboard slide with a headline, four KPI cards and a bar chart. All charts render as inline SVG (no JS).",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "kicker", "type": "string", "required": false, "default": "Q1 REPORT"},
+    {"name": "title", "type": "string", "required": true},
+    {"name": "subtitle", "type": "string", "required": false, "default": ""},
+    {"name": "kpis", "type": "array<object>", "required": true, "description": "Up to 4 KPI cards.", "item_shape": {"label": "string", "value": "string", "delta": "string (optional, e.g. +12%)", "delta_positive": "boolean"}},
+    {"name": "chart", "type": "object", "required": true, "item_shape": {
+      "title": "string",
+      "categories": "array<string>",
+      "values": "array<number>",
+      "unit": "string (optional)"
+    }},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#4f46e5"},
+    {"name": "footer", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "kicker": "Q1 2026 REPORT",
+    "title": "Performance snapshot",
+    "subtitle": "Growth sustained across all core channels.",
+    "kpis": [
+      {"label": "Revenue", "value": "$1.24M", "delta": "+18%", "delta_positive": true},
+      {"label": "Active Users", "value": "42.1K", "delta": "+7%", "delta_positive": true},
+      {"label": "Churn", "value": "2.1%", "delta": "-0.4pp", "delta_positive": true},
+      {"label": "NPS", "value": "62", "delta": "+4", "delta_positive": true}
+    ],
+    "chart": {
+      "title": "Monthly revenue (USD, thousands)",
+      "categories": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      "values": [180, 220, 240, 285, 310, 360],
+      "unit": "K"
+    }
+  }
+}

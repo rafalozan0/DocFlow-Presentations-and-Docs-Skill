@@ -1,0 +1,17 @@
+{
+  "id": "startup-pitch",
+  "name": "Startup Pitch · Hero Pill",
+  "category": "slides",
+  "style": "hero-pill",
+  "description": "Massive display title with three 'pill' metadata chips (top-left, center-bottom, bottom-right). Use as the opening slide of a pitch deck.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "title", "type": "string", "required": true},
+    {"name": "date_pill", "type": "string", "required": false, "default": "MONTH XX YEAR"},
+    {"name": "tagline_pill", "type": "string", "required": false, "default": "TAGLINE"},
+    {"name": "corner_pill", "type": "string", "required": false, "default": "CONFIDENTIAL"},
+    {"name": "background", "type": "string (hex)", "required": false, "default": "#ffe500"},
+    {"name": "ink", "type": "string (hex)", "required": false, "default": "#111111"}
+  ],
+  "example": {"title": "Startup Pitch"}
+}

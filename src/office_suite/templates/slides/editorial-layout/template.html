@@ -1,0 +1,41 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#fff; color:#111; }
+  .slide { padding: 112px 128px 88px; display:grid;
+           grid-template-columns: 1fr 1.2fr;
+           grid-template-rows: auto 1fr auto;
+           gap: 56px 96px; }
+  .lead { grid-column:1; grid-row:1; font-size:32px; line-height:1.45; max-width:42ch; margin:0; }
+  .media { grid-column:2; grid-row:1 / span 2; display:grid;
+           grid-template-columns:1fr 1fr; gap:3px; background:#e5e5e5; }
+  .media > div { background:#dcdcdc; background-size:cover; background-position:center; }
+  .subs { grid-column:1; grid-row:2; align-self:end;
+          display:grid; grid-template-columns:1fr 1fr; gap:44px; max-width:640px; }
+  .sub .icon { width:64px; height:64px; border-radius:50%; border:2px solid #111; margin-bottom:22px; }
+  .sub h4 { margin:0 0 10px; font-size:16px; letter-spacing:.1em; text-transform:uppercase;
+            color:#6b6b6b; font-weight:600; }
+  .sub p { margin:0; font-size:18px; line-height:1.55; color:#2b2b2b; }
+  footer { grid-column:1 / -1; grid-row:3; display:flex;
+           justify-content:space-between; align-items:center;
+           font-size:18px; color:#6b6b6b; }
+{% endblock %}
+{% block body %}
+  <p class="lead">{{ lead }}</p>
+  <div class="media" aria-hidden="true">
+    <div{% if image_left %} style="background-image:url('{{ image_left }}')"{% endif %}></div>
+    <div{% if image_right %} style="background-image:url('{{ image_right }}')"{% endif %}></div>
+  </div>
+  <div class="subs">
+    {% for s in subsections[:2] %}
+    <div class="sub">
+      <div class="icon"></div>
+      <h4>{{ s.title }}</h4>
+      <p>{{ s.body }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <footer>
+    <span>{{ brand }}</span>
+    <span>{{ page }}</span>
+  </footer>
+{% endblock %}

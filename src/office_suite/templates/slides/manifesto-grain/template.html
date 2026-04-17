@@ -1,0 +1,36 @@
+{% extends "slide_base.html" %}
+{% block slide_classes %}grain palette-{{ palette|default('purple') }}{% endblock %}
+{% block styles %}
+  body { color:#fff; }
+  .slide.palette-purple  { background: radial-gradient(130% 100% at 20% 40%, #7a52ff 0%, #5a2fe6 45%, #2b0ea8 100%); }
+  .slide.palette-teal    { background: radial-gradient(130% 100% at 20% 40%, #2dd4bf 0%, #0d9488 45%, #064e4a 100%); }
+  .slide.palette-crimson { background: radial-gradient(130% 100% at 20% 40%, #fb7185 0%, #e11d48 45%, #6b1032 100%); }
+  .slide.palette-sunset  { background: radial-gradient(130% 100% at 20% 40%, #ffb347 0%, #ff6b35 45%, #8a2a10 100%); }
+  .top { position:absolute; top:72px; left:96px; right:96px;
+         display:flex; justify-content:space-between;
+         font-size:28px; letter-spacing:.02em; z-index:1; }
+  .body { position:absolute; left:96px; right:96px; top:50%;
+          transform:translateY(-50%);
+          display:grid; grid-template-columns:auto 1fr;
+          align-items:center; gap:120px; z-index:1; }
+  .number { font-weight:200; font-size:360px; line-height:.85;
+            letter-spacing:-.04em; display:flex; align-items:flex-start; gap:16px; }
+  .number small { font-size:.22em; font-weight:400; margin-top:.5em; opacity:.9; letter-spacing:0; }
+  .points { display:grid; gap:44px; font-size:48px; line-height:1.25; max-width:62ch; }
+  .point { display:grid; grid-template-columns:96px 1fr; align-items:start; gap:40px; }
+  .point .arrow { font-size:1.1em; opacity:.85; }
+  .point.dim { opacity:.55; }
+{% endblock %}
+{% block body %}
+  <div class="top"><span>{{ eyebrow }}</span><span>{{ brand }}</span></div>
+  <div class="body">
+    <div class="number">{{ number }}{% if total %}<small>/{{ total }}</small>{% endif %}</div>
+    <div class="points">
+      {% for p in points %}
+      <div class="point{% if not (p.active or loop.first) %} dim{% endif %}">
+        <span class="arrow">&rarr;</span><span>{{ p.text }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{
+  "id": "design-review",
+  "name": "Design Review · Framed Hero",
+  "category": "slides",
+  "style": "framed-hero",
+  "description": "Stark black cover with an outlined frame around the hero title, a thin metadata band (phase/round), and a centered credits block. Good for design-review kickoffs and formal milestones.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "hero", "type": "string", "required": true, "description": "All-caps display title."},
+    {"name": "phase", "type": "string", "required": false, "default": "PHASE : XX"},
+    {"name": "round", "type": "string", "required": false, "default": "ROUND: XX"},
+    {"name": "footer_lines", "type": "array<string>", "required": false, "default": [], "description": "Lines printed in the footer block."}
+  ],
+  "example": {
+    "hero": "DESIGN REVIEW",
+    "phase": "PHASE : 02",
+    "round": "ROUND: 03",
+    "footer_lines": ["DESIGN REVIEW", "COMPANY / TEAM NAME", "PERSON ONE, PERSON TWO", "TODAY'S DATE"]
+  }
+}

@@ -1,0 +1,42 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#fff; color:#111; }
+  .slide { padding: 96px 128px; display:grid;
+           grid-template-rows: auto 1fr; gap:64px; }
+  .title { margin:0; font-size:72px; font-weight:800; letter-spacing:-.01em; }
+  .title::after { content:""; display:block; width:110px; height:10px;
+                  border-radius:5px; background:{{ accent|default('#4b5cff') }};
+                  margin-top:22px; }
+  .cols { display:grid; grid-template-columns:1fr 1px 1fr;
+          gap:96px; align-items:start; }
+  .divider { background:#e6e6e6; height:100%; }
+  .col .icon { width:72px; height:72px; border-radius:50%;
+               display:grid; place-items:center; margin-bottom:28px;
+               font-weight:700; font-size:34px; color:#fff; }
+  .col h3 { margin:0 0 22px; font-size:52px; font-weight:800; letter-spacing:-.01em; }
+  .col > p { margin:0 0 36px; font-size:24px; line-height:1.55;
+             color:#3a3a3a; max-width:44ch; }
+  .col h4 { margin:22px 0 6px; font-size:22px; font-weight:700; }
+  .col h4 + p { margin:0 0 8px; font-size:22px; line-height:1.55;
+                color:#444; max-width:44ch; }
+{% endblock %}
+{% block body %}
+  <h1 class="title">{{ title }}</h1>
+  <div class="cols">
+    {% set cols = columns[:2] %}
+    {% for c in cols %}
+    <section class="col">
+      <div class="icon" style="background:{{ c.icon_color|default('#111') }}">
+        {{ c.icon_emoji|default('') }}
+      </div>
+      <h3>{{ c.heading }}</h3>
+      {% if c.intro %}<p>{{ c.intro }}</p>{% endif %}
+      {% for b in c.blocks|default([]) %}
+        <h4>{{ b.label }}</h4>
+        <p>{{ b.text }}</p>
+      {% endfor %}
+    </section>
+    {% if loop.first %}<div class="divider" aria-hidden="true"></div>{% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

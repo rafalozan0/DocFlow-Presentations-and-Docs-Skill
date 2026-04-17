@@ -1,0 +1,24 @@
+{
+  "id": "cover-blue",
+  "name": "Cover · Solid Color",
+  "category": "slides",
+  "style": "solid-cover",
+  "description": "Cover slide with solid background color, large title (optional sparkle), author/date, and a vertical strip of geometric shapes. Use as deck opener.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "version", "type": "string", "required": false, "default": "", "description": "Small eyebrow above the title."},
+    {"name": "title", "type": "string", "required": true},
+    {"name": "sparkle", "type": "boolean", "required": false, "default": false},
+    {"name": "author", "type": "string", "required": false, "default": ""},
+    {"name": "date", "type": "string", "required": false, "default": ""},
+    {"name": "palette", "type": "enum(blue|graphite|indigo|forest|coral)", "required": false, "default": "blue"}
+  ],
+  "example": {
+    "version": "VERSION 2.0",
+    "title": "Finessing UI/UX Design Presentations",
+    "sparkle": true,
+    "author": "Bright Chinenyeze",
+    "date": "June, 2024",
+    "palette": "blue"
+  }
+}

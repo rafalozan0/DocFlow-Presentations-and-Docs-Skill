@@ -1,0 +1,28 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#050505; color:#fff; }
+  .slide { background:#0a0a0a; padding:128px 160px;
+           display:grid; grid-template-rows:auto 1fr auto; }
+  h1 { margin:0; font-size:200px; font-weight:800; line-height:.95; letter-spacing:-.03em; }
+  h1 .co { color:#fff; }
+  h1 .sales { color:{{ accent }}; display:block; }
+  .foot { align-self:end; font-size:22px; letter-spacing:.14em; line-height:1.7; }
+  .foot strong { font-weight:600; }
+  .dot { position:absolute; width:18px; height:18px; border-radius:50%;
+         background:#d9d9d9; bottom:56px; }
+  .dot.l { left:56px; } .dot.r { right:56px; }
+{% endblock %}
+{% block body %}
+  <div></div>
+  <h1>
+    <span class="co">{ {{- braced -}} }</span>
+    <span class="sales">{{ second_line }}</span>
+  </h1>
+  <div class="foot">
+    {% if partners %}<strong>{{ partners }}</strong><br/>{% endif %}
+    {% if date %}{{ date }}{% endif %}
+  </div>
+  {% if show_corner_dots %}
+    <div class="dot l"></div><div class="dot r"></div>
+  {% endif %}
+{% endblock %}

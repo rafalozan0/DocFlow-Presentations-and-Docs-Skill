@@ -1,0 +1,44 @@
+{% extends "doc_base.html" %}
+{% block styles %}
+  body { color:#f8fafc; background:{{ accent }}; }
+  .page { background:{{ accent }}; color:#f8fafc;
+          padding: 32mm 24mm 24mm; display:flex;
+          flex-direction:column; justify-content:space-between;
+          min-height:297mm; }
+  .kicker { font-size:10pt; letter-spacing:.22em; text-transform:uppercase;
+            color:#a5b4fc; font-weight:700; }
+  h1 { margin:12px 0 16px; font-size:42pt; line-height:1.05;
+       letter-spacing:-.02em; font-weight:800; max-width:20ch; }
+  .subtitle { font-size:14pt; color:#cbd5e1; max-width:50ch; line-height:1.5; }
+  .blocks { display:grid; grid-template-columns:1fr 1fr; gap:14mm;
+            padding-top:10mm; border-top:2px solid rgba(255,255,255,.2); }
+  .block h4 { margin:0 0 4px; font-size:9pt; color:#a5b4fc;
+              letter-spacing:.14em; text-transform:uppercase; }
+  .block p { margin:0; font-size:12pt; font-weight:600; color:#f8fafc; }
+  .meta { display:grid; grid-template-columns:repeat(3, 1fr); gap:14mm;
+          padding-top:8mm; border-top:1px solid rgba(255,255,255,.2);
+          font-size:10pt; }
+  .meta span { display:block; color:#a5b4fc; text-transform:uppercase;
+               letter-spacing:.12em; margin-bottom:4px; }
+{% endblock %}
+{% block body %}
+  <div class="page">
+    <div>
+      <div class="kicker">{{ kicker }}</div>
+      <h1>{{ title }}</h1>
+      {% if subtitle %}<div class="subtitle">{{ subtitle }}</div>{% endif %}
+    </div>
+
+    <div>
+      <div class="blocks">
+        <div class="block"><h4>Prepared for</h4><p>{{ prepared_for }}</p></div>
+        <div class="block"><h4>Prepared by</h4><p>{{ prepared_by }}</p></div>
+      </div>
+      <div class="meta" style="margin-top:14mm">
+        <div><span>No.</span>{{ proposal_number or '—' }}</div>
+        <div><span>Date</span>{{ date or '—' }}</div>
+        <div><span>Validity</span>{{ validity or '—' }}</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

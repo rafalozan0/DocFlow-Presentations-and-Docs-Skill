@@ -1,0 +1,25 @@
+{
+  "id": "proposal-cover",
+  "name": "Proposal Cover Page",
+  "category": "documents",
+  "style": "hero-cover",
+  "description": "One-page proposal cover with a hero title, client/supplier blocks, proposal number, and date. Used as the first page of a longer proposal.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "kicker", "type": "string", "required": false, "default": "PROPOSAL"},
+    {"name": "title", "type": "string", "required": true},
+    {"name": "subtitle", "type": "string", "required": false, "default": ""},
+    {"name": "prepared_for", "type": "string", "required": true},
+    {"name": "prepared_by", "type": "string", "required": true},
+    {"name": "proposal_number", "type": "string", "required": false, "default": ""},
+    {"name": "date", "type": "string", "required": false, "default": ""},
+    {"name": "validity", "type": "string", "required": false, "default": ""},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#111827"}
+  ],
+  "example": {
+    "title": "A next-generation platform for internal ops",
+    "subtitle": "Proposal for the 2026 infrastructure overhaul.",
+    "prepared_for": "Acme Corp.", "prepared_by": "Studio North",
+    "proposal_number": "PRO-2026-007", "date": "April 17, 2026", "validity": "30 days"
+  }
+}

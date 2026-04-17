@@ -1,0 +1,41 @@
+{
+  "id": "invoice-modern",
+  "name": "Invoice · Modern",
+  "category": "documents",
+  "style": "modern-clean",
+  "description": "Modern A4 invoice with a colored header bar, issuer/client blocks, itemized table, totals, and payment notes.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "invoice_number", "type": "string", "required": true},
+    {"name": "issue_date", "type": "string", "required": true},
+    {"name": "due_date", "type": "string", "required": false, "default": ""},
+    {"name": "currency", "type": "string", "required": false, "default": "USD"},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#4f46e5"},
+    {"name": "issuer", "type": "object", "required": true, "item_shape": {
+      "name": "string", "address_lines": "array<string>", "tax_id": "string (optional)", "email": "string (optional)", "logo_url": "string (optional)"
+    }},
+    {"name": "client", "type": "object", "required": true, "item_shape": {
+      "name": "string", "address_lines": "array<string>", "tax_id": "string (optional)", "email": "string (optional)"
+    }},
+    {"name": "items", "type": "array<object>", "required": true, "item_shape": {
+      "description": "string", "qty": "number", "unit_price": "number"
+    }},
+    {"name": "tax_rate", "type": "number", "required": false, "default": 0.0, "description": "Fractional, e.g. 0.21 for 21% VAT."},
+    {"name": "notes", "type": "string", "required": false, "default": ""},
+    {"name": "payment_details", "type": "array<string>", "required": false, "default": []}
+  ],
+  "example": {
+    "invoice_number": "INV-2026-0042",
+    "issue_date": "2026-04-17",
+    "due_date": "2026-05-01",
+    "currency": "USD",
+    "issuer": {"name": "Studio North LLC", "address_lines": ["221B Baker St.", "London, UK"], "tax_id": "GB123456789", "email": "hello@studionorth.co"},
+    "client": {"name": "Acme Corp.", "address_lines": ["1 Infinite Loop", "Cupertino, CA"], "tax_id": "US987654321"},
+    "items": [
+      {"description": "Design sprint (5 days)", "qty": 1, "unit_price": 8500},
+      {"description": "Brand guidelines", "qty": 1, "unit_price": 3200}
+    ],
+    "tax_rate": 0.21,
+    "payment_details": ["Bank: HSBC", "IBAN: GB29 NWBK 6016 1331 9268 19"]
+  }
+}

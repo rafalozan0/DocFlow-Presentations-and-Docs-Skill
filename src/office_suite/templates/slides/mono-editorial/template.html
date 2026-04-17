@@ -1,0 +1,43 @@
+{% extends "slide_base.html" %}
+{% block styles %}
+  body { background:#fff; color:#111; }
+  .slide { padding: 112px 144px 96px;
+           display:grid; grid-template-columns: 1fr 1.25fr; gap:96px;
+           grid-template-rows: auto 1fr auto; }
+  .left { grid-column:1; }
+  .right { grid-column:2; grid-row:1 / span 2; }
+  .kicker { font-size:22px; letter-spacing:.18em; text-transform:uppercase;
+            color:#8a8a8a; margin-bottom:18px; }
+  h1 { margin:0; font-size:88px; line-height:1.05; letter-spacing:-.02em;
+       font-weight:700; max-width:18ch; }
+  .intro { margin-top:36px; font-size:26px; line-height:1.5; color:#555;
+           max-width:34ch; }
+  .items { display:grid; gap:36px; }
+  .item { display:grid; grid-template-columns: 72px 1fr; gap:28px;
+          border-top:1px solid #e5e5e5; padding-top:26px; }
+  .item:first-child { border-top:0; padding-top:0; }
+  .item .n { font-family:"JetBrains Mono", monospace; font-size:22px;
+             color:#8a8a8a; font-weight:500; padding-top:6px; }
+  .item h4 { margin:0 0 8px; font-size:34px; font-weight:700; letter-spacing:-.01em; }
+  .item p { margin:0; font-size:22px; line-height:1.5; color:#4a4a4a; }
+  footer { grid-column:1 / -1; display:flex; justify-content:flex-end;
+           font-size:18px; color:#8a8a8a; }
+{% endblock %}
+{% block body %}
+  <div class="left">
+    {% if kicker %}<div class="kicker">{{ kicker }}</div>{% endif %}
+    <h1>{{ title }}</h1>
+    {% if intro %}<p class="intro">{{ intro }}</p>{% endif %}
+  </div>
+  <div class="right">
+    <div class="items">
+      {% for it in items %}
+      <div class="item">
+        <div class="n">{{ '%02d'|format(loop.index) }}</div>
+        <div><h4>{{ it.label }}</h4><p>{{ it.body }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <footer>{{ footer }}</footer>
+{% endblock %}

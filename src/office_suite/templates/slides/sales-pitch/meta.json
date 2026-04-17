@@ -1,0 +1,22 @@
+{
+  "id": "sales-pitch",
+  "name": "Sales Pitch · Braced Title",
+  "category": "slides",
+  "style": "braced-hero",
+  "description": "Dark cover with a braced {Company} title and an accent-colored product line. Footer shows partners and date. Use for partnership pitches and sales decks.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "braced", "type": "string", "required": true, "description": "Will be wrapped with braces: {value}."},
+    {"name": "second_line", "type": "string", "required": true},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#14e08a"},
+    {"name": "partners", "type": "string", "required": false, "default": ""},
+    {"name": "date", "type": "string", "required": false, "default": ""},
+    {"name": "show_corner_dots", "type": "boolean", "required": false, "default": true}
+  ],
+  "example": {
+    "braced": "Company",
+    "second_line": "Sales Pitch",
+    "partners": "OUR COMPANY × YOUR COMPANY",
+    "date": "Month XX, 2024"
+  }
+}

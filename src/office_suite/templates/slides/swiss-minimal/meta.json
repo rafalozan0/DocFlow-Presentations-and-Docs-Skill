@@ -1,0 +1,23 @@
+{
+  "id": "swiss-minimal",
+  "name": "Swiss Minimal",
+  "category": "slides",
+  "style": "minimal",
+  "description": "Extremely clean slide with a tiny numbered section label, a medium-size headline, a supporting paragraph, and a thin horizontal rule. Perfect for calm, modern decks where content speaks.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "section", "type": "string", "required": false, "default": "01 / INTRO"},
+    {"name": "headline", "type": "string", "required": true},
+    {"name": "body", "type": "string", "required": false, "default": ""},
+    {"name": "footer_left", "type": "string", "required": false, "default": ""},
+    {"name": "footer_right", "type": "string", "required": false, "default": ""},
+    {"name": "align", "type": "enum(left|center)", "required": false, "default": "left"}
+  ],
+  "example": {
+    "section": "01 / APPROACH",
+    "headline": "Less, but better.",
+    "body": "We remove everything that doesn't serve the message, and then we remove a little more.",
+    "footer_left": "studio.co",
+    "footer_right": "01"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "question-3d",
+  "name": "Question Slide (3D Glow)",
+  "category": "slides",
+  "style": "cinematic-dark",
+  "description": "Dark slide with a 3D-looking colored glow on the right and a typographic question on the left. Great for section breaks and rhetorical prompts.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "question", "type": "string", "required": true, "description": "Question text. Wrap the emphasized part in <b>...</b> to bold it."},
+    {"name": "palette", "type": "enum(blue|magenta|amber|green)", "required": false, "default": "blue"},
+    {"name": "eyebrow", "type": "string", "required": false, "default": ""}
+  ],
+  "example": {
+    "question": "How do we <b>simplify</b> the process?",
+    "palette": "blue"
+  }
+}

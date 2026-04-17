@@ -1,0 +1,36 @@
+{
+  "id": "report-executive",
+  "name": "Executive Report",
+  "category": "documents",
+  "style": "executive",
+  "description": "Executive-style multi-section report with a cover page, KPI band, and free-form sections. Each section accepts heading, body paragraphs, and optional bullet list.",
+  "page_size": "A4",
+  "slots": [
+    {"name": "cover", "type": "object", "required": true, "item_shape": {
+      "title": "string", "subtitle": "string (optional)", "author": "string (optional)",
+      "date": "string (optional)", "company": "string (optional)"
+    }},
+    {"name": "accent", "type": "string (hex)", "required": false, "default": "#0f172a"},
+    {"name": "kpis", "type": "array<object>", "required": false, "default": [], "item_shape": {"label": "string", "value": "string"}},
+    {"name": "sections", "type": "array<object>", "required": true, "item_shape": {
+      "heading": "string",
+      "paragraphs": "array<string>",
+      "bullets": "array<string>"
+    }},
+    {"name": "footer", "type": "string", "required": false, "default": "Confidential"}
+  ],
+  "example": {
+    "cover": {"title": "Q1 2026 Executive Report", "subtitle": "Performance, risks, and outlook",
+              "author": "Rafael Lozano", "date": "April 17, 2026", "company": "Studio North"},
+    "kpis": [
+      {"label": "Revenue", "value": "$1.24M"},
+      {"label": "Growth", "value": "+18% YoY"},
+      {"label": "NPS", "value": "62"}
+    ],
+    "sections": [
+      {"heading": "Summary", "paragraphs": ["Strong quarter driven by onboarding redesign and enterprise deals."]},
+      {"heading": "Risks", "bullets": ["Currency exposure in EU markets.", "Single-vendor dependency for payments."]},
+      {"heading": "Outlook", "paragraphs": ["We maintain a confident outlook for Q2, assuming stable macro conditions."]}
+    ]
+  }
+}

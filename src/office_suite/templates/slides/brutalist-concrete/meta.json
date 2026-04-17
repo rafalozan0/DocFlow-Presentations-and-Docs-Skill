@@ -1,0 +1,26 @@
+{
+  "id": "brutalist-concrete",
+  "name": "Brutalist · Concrete Grain",
+  "category": "slides",
+  "style": "brutalist",
+  "description": "Brutalist slide with concrete grain background, heavy condensed display type, harsh rules, and tabular metadata. Use for raw editorial, techno, underground/agency decks, or manifesto sections.",
+  "aspect": "16:9",
+  "slots": [
+    {"name": "tag", "type": "string", "required": false, "default": "[ SECTION 01 ]", "description": "Top eyebrow tag."},
+    {"name": "title", "type": "string", "required": true, "description": "Display headline. All-caps enforced by CSS."},
+    {"name": "kicker", "type": "string", "required": false, "default": "", "description": "Optional smaller headline above the title."},
+    {"name": "meta_rows", "type": "array<object>", "required": false, "default": [], "item_shape": {"label": "string", "value": "string"}},
+    {"name": "tone", "type": "enum(concrete|rust|sulfur|midnight)", "required": false, "default": "concrete"}
+  ],
+  "example": {
+    "tag": "[ SECTION 01 ]",
+    "kicker": "A NEW DOCTRINE",
+    "title": "We build for impact, not applause",
+    "meta_rows": [
+      {"label": "FILED", "value": "2026-04-17"},
+      {"label": "STATUS", "value": "LIVE"},
+      {"label": "AUTHOR", "value": "STUDIO NORTH"}
+    ],
+    "tone": "concrete"
+  }
+}

@@ -8,8 +8,9 @@ pandas>=2.0.0
 Pillow>=10.0.0
 numpy>=1.24.0
 matplotlib>=3.8.0
-# Optional dependencies
+# Core for template engine (HTML/CSS + Jinja templates)
 Jinja2>=3.1.0
+# Optional dependencies
 click>=8.1.0
 rich>=13.0.0
 python-magic>=0.4.27
